@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #2c3e50;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-container {
+    width: 800px;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    background: #34495e;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Main Menu Styles */
+#main-menu {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    text-align: center;
+}
+
+#main-menu h1 {
+    font-size: 48px;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.menu-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+select, button {
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #ecf0f1;
+}
+
+button:hover {
+    background: #bdc3c7;
+}
+
+/* Game Screen Styles */
+#game-screen {
+    background: #87CEEB;
+}
+
+#game-stats {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+#game-area {
+    width: 100%;
+    height: 70%;
+    position: relative;
+    overflow: hidden;
+}
+
+#player {
+    width: 60px;
+    height: 40px;
+    background: #e74c3c;
+    position: absolute;
+    bottom: 100px;
+    left: 50px;
+    transition: transform 0.1s;
+}
+
+#terrain {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: #27ae60;
+}
+
+#controls {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+#controls button {
+    padding: 15px 30px;
+    font-size: 24px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Game Over Screen Styles */
+#game-over {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    text-align: center;
+}
+
+#game-over h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#final-stats {
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+@media (max-width: 800px) {
+    #game-container {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+}

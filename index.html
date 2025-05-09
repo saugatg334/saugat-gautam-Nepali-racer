@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Racer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen active">
+            <h1>Nepali Racer</h1>
+            <div class="menu-options">
+                <select id="vehicle-select">
+                    <option value="jeep">Jeep</option>
+                    <option value="truck">Truck</option>
+                    <option value="bike">Bike</option>
+                </select>
+                <select id="stage-select">
+                    <option value="east-west">East-West Highway</option>
+                    <option value="araniko">Araniko Highway</option>
+                    <option value="bp">BP Highway</option>
+                </select>
+                <button id="start-btn">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div id="game-stats">
+                <div id="fuel">Fuel: <span id="fuel-value">100</span>%</div>
+                <div id="coins">Coins: <span id="coin-value">0</span></div>
+                <div id="distance">Distance: <span id="distance-value">0</span>m</div>
+            </div>
+            <div id="game-area">
+                <div id="player"></div>
+                <div id="terrain"></div>
+            </div>
+            <div id="controls">
+                <button id="brake-btn">⬅️ Brake</button>
+                <button id="accelerate-btn">➡️ Gas</button>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over" class="screen">
+            <h2>Game Over</h2>
+            <div id="final-stats"></div>
+            <button id="retry-btn">Retry</button>
+            <button id="menu-btn">Main Menu</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
