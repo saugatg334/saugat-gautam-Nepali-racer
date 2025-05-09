@@ -13,14 +13,22 @@
             <h1>Nepali Racer</h1>
             <div class="menu-options">
                 <select id="vehicle-select">
-                    <option value="jeep">Jeep</option>
-                    <option value="truck">Truck</option>
-                    <option value="bike">Bike</option>
+                    <option value="tata-sumo">Tata Sumo</option>
+                    <option value="mahindra-bolero">Mahindra Bolero</option>
+                    <option value="royal-enfield">Royal Enfield</option>
+                    <option value="tempo">Tempo (Three Wheeler)</option>
+                    <option value="sajha-bus">Sajha Bus</option>
+                    <option value="tuk-tuk">Electric Tuk Tuk</option>
+                    <option value="hotrod">Nepali HotRod</option>
+                    <option value="mountain-bike">Mountain Bike</option>
                 </select>
                 <select id="stage-select">
-                    <option value="east-west">East-West Highway</option>
-                    <option value="araniko">Araniko Highway</option>
-                    <option value="bp">BP Highway</option>
+                    <option value="east-west">East-West Highway (Mahendra Highway)</option>
+                    <option value="araniko">Araniko Highway (Kathmandu to Tibet)</option>
+                    <option value="bp">BP Highway (Kathmandu to Dharan)</option>
+                    <option value="prithvi">Prithvi Highway (Kathmandu to Pokhara)</option>
+                    <option value="nijgadh">Nijgadh Fast Track</option>
+                    <option value="moon">Moon Track</option>
                 </select>
                 <button id="start-btn">Start Game</button>
             </div>
@@ -32,10 +40,13 @@
                 <div id="fuel">Fuel: <span id="fuel-value">100</span>%</div>
                 <div id="coins">Coins: <span id="coin-value">0</span></div>
                 <div id="distance">Distance: <span id="distance-value">0</span>m</div>
+                <div id="speed">Speed: <span id="speed-value">0</span> km/h</div>
             </div>
             <div id="game-area">
                 <div id="player"></div>
                 <div id="terrain"></div>
+                <div id="background"></div>
+                <div id="obstacles"></div>
             </div>
             <div id="controls">
                 <button id="brake-btn">⬅️ Brake</button>
