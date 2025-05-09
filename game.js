@@ -11,6 +11,7 @@ class NepalRacer {
         };
 
         this.screens = {
+            loading: document.getElementById('loading-screen'),
             menu: document.getElementById('main-menu'),
             game: document.getElementById('game-screen'),
             gameOver: document.getElementById('game-over')
@@ -30,7 +31,8 @@ class NepalRacer {
             retryBtn: document.getElementById('retry-btn'),
             menuBtn: document.getElementById('menu-btn'),
             terrain: document.getElementById('terrain'),
-            background: document.getElementById('background')
+            background: document.getElementById('background'),
+            loadingProgress: document.querySelector('.loading-progress')
         };
 
         this.vehicles = {
@@ -60,6 +62,17 @@ class NepalRacer {
             friction: 0.98,
             gravity: 1
         };
+
+        this.init();
+    }
+
+    init() {
+        // Simulate loading
+        this.elements.loadingProgress.style.width = '100%';
+        setTimeout(() => {
+            this.screens.loading.style.display = 'none';
+            this.showScreen('menu');
+        }, 3000);
 
         this.bindEvents();
     }
