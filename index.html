@@ -14,7 +14,10 @@
                 <div class="loading-progress"></div>
             </div>
             <p>Loading...</p>
-            <small>Developed by Saugat Gautam</small>
+            <div class="developer-info">
+                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg" alt="Saugat Gautam" class="developer-avatar">
+                <small>Developed by Saugat Gautam</small>
+            </div>
         </div>
     </div>
     <div id="game-container">
@@ -22,27 +25,37 @@
         <div id="main-menu" class="screen">
             <h1>Nepali Racer</h1>
             <div class="menu-options">
-                <select id="vehicle-select">
-                    <option value="tata-sumo">Tata Sumo (Level 1)</option>
-                    <option value="mahindra-bolero">Mahindra Bolero (Level 1)</option>
-                    <option value="royal-enfield">Royal Enfield (Level 2)</option>
-                    <option value="tempo">Tempo (Level 1)</option>
-                    <option value="sajha-bus">Sajha Bus (Level 2)</option>
-                    <option value="tuk-tuk">Electric Tuk Tuk (Level 1)</option>
-                    <option value="hotrod">Nepali HotRod (Level 3)</option>
-                    <option value="mountain-bike">Mountain Bike (Level 1)</option>
-                    <option value="mustang">Mustang GT (Level 4)</option>
-                    <option value="super-bike">Super Bike (Level 5)</option>
-                </select>
-                <select id="stage-select">
-                    <option value="east-west">East-West Highway - Easy (Level 1)</option>
-                    <option value="araniko">Araniko Highway - Medium (Level 2)</option>
-                    <option value="bp">BP Highway - Medium (Level 2)</option>
-                    <option value="prithvi">Prithvi Highway - Hard (Level 3)</option>
-                    <option value="nijgadh">Nijgadh Fast Track - Expert (Level 4)</option>
-                    <option value="moon">Moon Track - Extreme (Level 5)</option>
-                </select>
-                <button id="start-btn">Start Game</button>
+                <div class="select-container">
+                    <div class="select-preview">
+                        <img id="vehicle-preview" src="https://images.pexels.com/photos/2127039/pexels-photo-2127039.jpeg" alt="Vehicle Preview">
+                    </div>
+                    <select id="vehicle-select">
+                        <option value="tata-sumo" data-image="https://images.pexels.com/photos/2127039/pexels-photo-2127039.jpeg">Tata Sumo (Level 1)</option>
+                        <option value="mahindra-bolero" data-image="https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg">Mahindra Bolero (Level 1)</option>
+                        <option value="royal-enfield" data-image="https://images.pexels.com/photos/2519374/pexels-photo-2519374.jpeg">Royal Enfield (Level 2)</option>
+                        <option value="tempo" data-image="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg">Tempo (Level 1)</option>
+                        <option value="sajha-bus" data-image="https://images.pexels.com/photos/385998/pexels-photo-385998.jpeg">Sajha Bus (Level 2)</option>
+                        <option value="tuk-tuk" data-image="https://images.pexels.com/photos/5759959/pexels-photo-5759959.jpeg">Electric Tuk Tuk (Level 1)</option>
+                        <option value="hotrod" data-image="https://images.pexels.com/photos/1592384/pexels-photo-1592384.jpeg">Nepali HotRod (Level 3)</option>
+                        <option value="mountain-bike" data-image="https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg">Mountain Bike (Level 1)</option>
+                        <option value="mustang" data-image="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg">Mustang GT (Level 4)</option>
+                        <option value="super-bike" data-image="https://images.pexels.com/photos/2393821/pexels-photo-2393821.jpeg">Super Bike (Level 5)</option>
+                    </select>
+                </div>
+                <div class="select-container">
+                    <div class="select-preview">
+                        <img id="stage-preview" src="https://images.pexels.com/photos/831056/pexels-photo-831056.jpeg" alt="Stage Preview">
+                    </div>
+                    <select id="stage-select">
+                        <option value="east-west" data-image="https://images.pexels.com/photos/831056/pexels-photo-831056.jpeg">East-West Highway - Easy (Level 1)</option>
+                        <option value="araniko" data-image="https://images.pexels.com/photos/808910/pexels-photo-808910.jpeg">Araniko Highway - Medium (Level 2)</option>
+                        <option value="bp" data-image="https://images.pexels.com/photos/1955134/pexels-photo-1955134.jpeg">BP Highway - Medium (Level 2)</option>
+                        <option value="prithvi" data-image="https://images.pexels.com/photos/1252814/pexels-photo-1252814.jpeg">Prithvi Highway - Hard (Level 3)</option>
+                        <option value="nijgadh" data-image="https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg">Nijgadh Fast Track - Expert (Level 4)</option>
+                        <option value="moon" data-image="https://images.pexels.com/photos/39561/solar-flare-sun-eruption-energy-39561.jpeg">Moon Track - Extreme (Level 5)</option>
+                    </select>
+                </div>
+                <button id="start-btn">Start Race</button>
             </div>
         </div>
 

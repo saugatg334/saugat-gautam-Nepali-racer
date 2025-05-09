@@ -38,6 +38,22 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.developer-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.developer-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffd700;
+}
+
 .loading-bar {
     width: 300px;
     height: 20px;
@@ -91,9 +107,26 @@ body {
 
 /* Main Menu Styles */
 #main-menu {
-    background: linear-gradient(135deg, #3498db, #2c3e50);
+    background: url('https://images.pexels.com/photos/2098427/pexels-photo-2098427.jpeg') center/cover;
     color: white;
     text-align: center;
+    padding: 20px;
+}
+
+#main-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+#main-menu > * {
+    position: relative;
+    z-index: 2;
 }
 
 #main-menu h1 {
@@ -107,23 +140,70 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+    max-width: 600px;
 }
 
-select, button {
-    padding: 12px 24px;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background: #ecf0f1;
+.select-container {
+    position: relative;
+    width: 100%;
+}
+
+.select-preview {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.select-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
 }
 
 select {
-    width: 300px;
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
-button:hover {
-    background: #bdc3c7;
+select:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: translateY(-2px);
+}
+
+select option {
+    background: #2c3e50;
+}
+
+#start-btn {
+    padding: 20px 40px;
+    font-size: 24px;
+    background: #ffd700;
+    color: #2c3e50;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+#start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
 
 /* Game Screen Styles */

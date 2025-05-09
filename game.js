@@ -40,7 +40,9 @@ class NepalRacer {
             background: document.getElementById('background'),
             loadingProgress: document.querySelector('.loading-progress'),
             obstacles: document.getElementById('obstacles'),
-            collectibles: document.getElementById('collectibles')
+            collectibles: document.getElementById('collectibles'),
+            vehiclePreview: document.getElementById('vehicle-preview'),
+            stagePreview: document.getElementById('stage-preview')
         };
 
         this.vehicles = {
@@ -82,6 +84,13 @@ class NepalRacer {
     }
 
     init() {
+        // Initialize preview images
+        this.updatePreviewImages();
+        
+        // Add change event listeners for previews
+        this.elements.vehicleSelect.addEventListener('change', () => this.updatePreviewImages());
+        this.elements.stageSelect.addEventListener('change', () => this.updatePreviewImages());
+
         // Simulate loading
         this.elements.loadingProgress.style.width = '100%';
         setTimeout(() => {
@@ -90,6 +99,19 @@ class NepalRacer {
         }, 3000);
 
         this.bindEvents();
+    }
+
+    updatePreviewImages() {
+        const selectedVehicle = this.elements.vehicleSelect.selectedOptions[0];
+        const selectedStage = this.elements.stageSelect.selectedOptions[0];
+        
+        if (selectedVehicle.dataset.image) {
+            this.elements.vehiclePreview.src = selectedVehicle.dataset.image;
+        }
+        
+        if (selectedStage.dataset.image) {
+            this.elements.stagePreview.src = selectedStage.dataset.image;
+        }
     }
 
     bindEvents() {
@@ -290,6 +312,7 @@ class NepalRacer {
         finalStats.innerHTML = `
             Distance: ${Math.round(this.gameState.distance)}m<br>
             Top Speed: ${Math.round(this.gameState.speed)} km/h<br>
+            
             Coins: ${this.gameState.coins}<br>
             Diamonds: ${this.gameState.diamonds}<br>
             Score: ${this.gameState.score}
