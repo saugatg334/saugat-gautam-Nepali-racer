@@ -23,22 +23,24 @@
             <h1>Nepali Racer</h1>
             <div class="menu-options">
                 <select id="vehicle-select">
-                    <option value="tata-sumo">Tata Sumo</option>
-                    <option value="mahindra-bolero">Mahindra Bolero</option>
-                    <option value="royal-enfield">Royal Enfield</option>
-                    <option value="tempo">Tempo (Three Wheeler)</option>
-                    <option value="sajha-bus">Sajha Bus</option>
-                    <option value="tuk-tuk">Electric Tuk Tuk</option>
-                    <option value="hotrod">Nepali HotRod</option>
-                    <option value="mountain-bike">Mountain Bike</option>
+                    <option value="tata-sumo">Tata Sumo (Level 1)</option>
+                    <option value="mahindra-bolero">Mahindra Bolero (Level 1)</option>
+                    <option value="royal-enfield">Royal Enfield (Level 2)</option>
+                    <option value="tempo">Tempo (Level 1)</option>
+                    <option value="sajha-bus">Sajha Bus (Level 2)</option>
+                    <option value="tuk-tuk">Electric Tuk Tuk (Level 1)</option>
+                    <option value="hotrod">Nepali HotRod (Level 3)</option>
+                    <option value="mountain-bike">Mountain Bike (Level 1)</option>
+                    <option value="mustang">Mustang GT (Level 4)</option>
+                    <option value="super-bike">Super Bike (Level 5)</option>
                 </select>
                 <select id="stage-select">
-                    <option value="east-west">East-West Highway (Mahendra Highway)</option>
-                    <option value="araniko">Araniko Highway (Kathmandu to Tibet)</option>
-                    <option value="bp">BP Highway (Kathmandu to Dharan)</option>
-                    <option value="prithvi">Prithvi Highway (Kathmandu to Pokhara)</option>
-                    <option value="nijgadh">Nijgadh Fast Track</option>
-                    <option value="moon">Moon Track</option>
+                    <option value="east-west">East-West Highway - Easy (Level 1)</option>
+                    <option value="araniko">Araniko Highway - Medium (Level 2)</option>
+                    <option value="bp">BP Highway - Medium (Level 2)</option>
+                    <option value="prithvi">Prithvi Highway - Hard (Level 3)</option>
+                    <option value="nijgadh">Nijgadh Fast Track - Expert (Level 4)</option>
+                    <option value="moon">Moon Track - Extreme (Level 5)</option>
                 </select>
                 <button id="start-btn">Start Game</button>
             </div>
@@ -47,8 +49,11 @@
         <!-- Game Screen -->
         <div id="game-screen" class="screen">
             <div id="game-stats">
+                <div id="level">Level: <span id="level-value">1</span></div>
+                <div id="score">Score: <span id="score-value">0</span></div>
                 <div id="fuel">Fuel: <span id="fuel-value">100</span>%</div>
                 <div id="coins">Coins: <span id="coin-value">0</span></div>
+                <div id="diamonds">Diamonds: <span id="diamond-value">0</span></div>
                 <div id="distance">Distance: <span id="distance-value">0</span>m</div>
                 <div id="speed">Speed: <span id="speed-value">0</span> km/h</div>
             </div>
@@ -57,6 +62,7 @@
                 <div id="terrain"></div>
                 <div id="background"></div>
                 <div id="obstacles"></div>
+                <div id="collectibles"></div>
             </div>
             <div id="controls">
                 <button id="brake-btn">⬅️ Brake</button>

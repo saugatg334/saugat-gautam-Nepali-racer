@@ -191,6 +191,39 @@ button:hover {
     z-index: 8;
 }
 
+#collectibles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 7;
+}
+
+.collectible {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    z-index: 7;
+}
+
+.collectible.coin {
+    background: #f1c40f;
+    box-shadow: 0 0 10px #f39c12;
+    animation: float 1s infinite alternate;
+}
+
+.collectible.diamond {
+    background: #3498db;
+    box-shadow: 0 0 10px #2980b9;
+    animation: float 1s infinite alternate;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+@keyframes float {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
 #controls {
     position: absolute;
     bottom: 20px;
