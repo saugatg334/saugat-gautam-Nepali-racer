@@ -40,6 +40,7 @@ body {
 
 .developer-info {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
@@ -47,11 +48,17 @@ body {
 }
 
 .developer-avatar {
-    width: 50px;
-    height: 50px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #ffd700;
+    border: 3px solid #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.developer-avatar:hover {
+    transform: scale(1.05);
 }
 
 .loading-bar {
@@ -77,8 +84,10 @@ body {
 }
 
 .loading-content small {
-    font-size: 14px;
+    font-size: 16px;
     opacity: 0.8;
+    color: #ffd700;
+    font-weight: bold;
 }
 
 #game-container {
