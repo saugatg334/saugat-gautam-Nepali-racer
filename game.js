@@ -58,19 +58,96 @@ class NepalRacer {
             'super-bike': { maxSpeed: 30, acceleration: 0.8, handling: 0.95, fuelEfficiency: 0.3, color: '#d35400', level: 5 }
         };
 
-        this.stages = {
-            'east-west': { gravity: 1, friction: 0.98, background: '#87CEEB', terrain: '#27ae60', difficulty: 1 },
-            'araniko': { gravity: 1.1, friction: 0.96, background: '#B0C4DE', terrain: '#95a5a6', difficulty: 2 },
-            'bp': { gravity: 1, friction: 0.97, background: '#87CEEB', terrain: '#8e44ad', difficulty: 2 },
-            'prithvi': { gravity: 1.05, friction: 0.97, background: '#87CEEB', terrain: '#16a085', difficulty: 3 },
-            'nijgadh': { gravity: 1, friction: 0.99, background: '#87CEEB', terrain: '#2c3e50', difficulty: 4 },
-            'moon': { gravity: 0.16, friction: 0.995, background: '#2c3e50', terrain: '#7f8c8d', difficulty: 5 }
-        };
+     this.stages = {
+    'east-west': {
+        gravity: 1,
+        friction: 0.98,
+        background: '#87CEEB',
+        terrain: '#27ae60',
+        difficulty: 1,
+        levels: Array(100).fill().map((_, i) => ({
+            levelNumber: i + 1,
+            diamondBonus: i + 10, // Bonus increases per level
+            unlockCharacter: i === 0, // Unlock character at level 1
+            unlockVehicle: i === 0,  // Unlock vehicle at level 1
+            unlockStage: i === 0     // Unlock stage at level 1
+        }))
+    },
+    // Other stages
+}; 
+   'east-west': {
+    gravity: 1,
+    friction: 0.98,
+    background: '#87CEEB',
+    terrain: '#27ae60',
+    difficulty: 1,
+    levels: 100 // Added this line
+}, 
+    completeLevel() {
+    const currentStage = this.stages[this.gameState.currentStage];
+    const currentLevel = currentStage.levels[this.gameState.currentLevel - 1];
 
+    // Apply diamond bonus
+    this.gameState.diamonds += currentLevel.diamondBonus;
+
+    // Unlock character, vehicle, and stage
+    if (currentLevel.unlockCharacter) this.gameState.unlockedCharacters.push('Character_' + this.gameState.currentLevel);
+    if (currentLevel.unlockVehicle) this.gameState.unlockedVehicles.push(this.gameState.currentVehicle);
+    if (currentLevel.unlockStage) this.gameState.unlockedStages.push(this.gameState.currentStage);
+
+    // Move to the next level
+    if (this.gameState.currentLevel < currentStage.levels.length) {
+        this.gameState.currentLevel++;
+    } else {
+        this.gameOver(); // End game if all levels are complete
+    }
+
+    this.updateUI();
+} 
+        purchaseItem(itemType, itemName) {
+    const prices = {
+        vehicle: 100, // Example coin cost
+        stage: 200
+    };
+
+    if (this.gameState.coins >= prices[itemType]) {
+        this.gameState.coins -= prices[itemType];
+        
+        if (itemType === 'vehicle') {
+            this.gameState.unlockedVehicles.push(itemName);
+        } else if (itemType === 'stage') {
+            this.gameState.unlockedStages.push(itemName);
+        }
+
+        this.updateUI();
+        alert(`${itemName} purchased successfully!`);
+    } else {
+        alert('Not enough coins to purchase this item.');
+    }
+}
+   useDiamondBoost() {
+    if (this.gameState.diamonds > 0) {
+        this.physics.maxSpeed += 2; // Example boost
+        this.gameState.diamonds--;
+        this.updateUI();
+        alert('Boost activated!');
+    } else {
+        alert('Not enough diamonds for a boost.');
+    }
+}
         this.collectibles = {
             coin: { value: 1, color: '#f1c40f', radius: 10 },
             diamond: { value: 10, color: '#3498db', radius: 8 }
         };
+        this.gameState = {
+    ...this.gameState,
+    currentLevel: 1, // Track the current level
+    unlockedCharacters: [],
+    unlockedVehicles: [],
+    unlockedStages: [],
+    coins: 0, // For purchasing
+    diamonds: 0 // For boosts
+};
 
         this.physics = {
             velocity: 0,
