@@ -1,0 +1,20 @@
+[
+    {
+        "id": "east-west",
+        "gravity": 1,
+        "friction": 0.98,
+        "background": "#87CEEB",
+        "terrain": "#27ae60",
+        "difficulty": 1,
+        "levels": 100
+    },
+    {
+        "id": "himalayan-highway",
+        "gravity": 1.2,
+        "friction": 0.95,
+        "background": "#4682B4",
+        "terrain": "#2E8B57",
+        "difficulty": 2,
+        "levels": 100
+    }
+]
