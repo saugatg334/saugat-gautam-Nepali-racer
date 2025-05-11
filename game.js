@@ -79,7 +79,20 @@ class NepalRacer {
             coin: { value: 1, color: '#f1c40f', radius: 10 },
             diamond: { value: 10, color: '#3498db', radius: 8 }
         };
+async loadGameData() {
+    const vehiclesResponse = await fetch('vehicles.json');
+    this.vehicles = await vehiclesResponse.json();
+    async init() {
+    await this.loadGameData();
+    this.updatePreviewImages();
+    this.bindEvents();
+    this.showScreen('menu');
+}
 
+
+    const stagesResponse = await fetch('stages.json');
+    this.stages = await stagesResponse.json();
+}
         this.gameState = {
             ...this.gameState,
             currentLevel: 1,
@@ -365,7 +378,14 @@ this.elements.stageSelect.addEventListener('change', () => this.updatePreviewIma
 
         requestAnimationFrame(() => this.gameLoop());
     }
+// vehicles.js
+export const vehicles = {
+    'tata-sumo': { /* ... */ },
+    'mahindra-bolero': { /* ... */ }
+};
 
+// game.js
+import { vehicles } from './vehicles.js';
     gameOver() {
         this.gameState.isRunning = false;
         const finalStats = document.getElementById('final-stats');
@@ -405,3 +425,16 @@ updatePreviewImages() {
 window.addEventListener('load', () => {
     const game = new NepalRacer();
 });
+populateDropdown(selectElement, data, labelKey) {
+    data.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.textContent = item[labelKey];
+        option.dataset.image = item.image; // For previews
+        selectElement.appendChild(option);
+    });
+}
+
+// Example call
+populateDropdown(this.elements.vehicleSelect, this.vehicles, 'id');
+populateDropdown(this.elements.stageSelect, this.stages, 'id');
