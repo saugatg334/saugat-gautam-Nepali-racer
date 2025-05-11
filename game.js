@@ -58,96 +58,37 @@ class NepalRacer {
             'super-bike': { maxSpeed: 30, acceleration: 0.8, handling: 0.95, fuelEfficiency: 0.3, color: '#d35400', level: 5 }
         };
 
-     this.stages = {
-    'east-west': {
-        gravity: 1,
-        friction: 0.98,
-        background: '#87CEEB',
-        terrain: '#27ae60',
-        difficulty: 1,
-        levels: Array(100).fill().map((_, i) => ({
-            levelNumber: i + 1,
-            diamondBonus: i + 10, // Bonus increases per level
-            unlockCharacter: i === 0, // Unlock character at level 1
-            unlockVehicle: i === 0,  // Unlock vehicle at level 1
-            unlockStage: i === 0     // Unlock stage at level 1
-        }))
-    },
-    // Other stages
-}; 
-   'east-west': {
-    gravity: 1,
-    friction: 0.98,
-    background: '#87CEEB',
-    terrain: '#27ae60',
-    difficulty: 1,
-    levels: 100 // Added this line
-}, 
-    completeLevel() {
-    const currentStage = this.stages[this.gameState.currentStage];
-    const currentLevel = currentStage.levels[this.gameState.currentLevel - 1];
+        this.stages = {
+            'east-west': {
+                gravity: 1,
+                friction: 0.98,
+                background: '#87CEEB',
+                terrain: '#27ae60',
+                difficulty: 1,
+                levels: Array(100).fill().map((_, i) => ({
+                    levelNumber: i + 1,
+                    diamondBonus: i + 10,
+                    unlockCharacter: i === 0,
+                    unlockVehicle: i === 0,
+                    unlockStage: i === 0
+                }))
+            }
+        };
 
-    // Apply diamond bonus
-    this.gameState.diamonds += currentLevel.diamondBonus;
-
-    // Unlock character, vehicle, and stage
-    if (currentLevel.unlockCharacter) this.gameState.unlockedCharacters.push('Character_' + this.gameState.currentLevel);
-    if (currentLevel.unlockVehicle) this.gameState.unlockedVehicles.push(this.gameState.currentVehicle);
-    if (currentLevel.unlockStage) this.gameState.unlockedStages.push(this.gameState.currentStage);
-
-    // Move to the next level
-    if (this.gameState.currentLevel < currentStage.levels.length) {
-        this.gameState.currentLevel++;
-    } else {
-        this.gameOver(); // End game if all levels are complete
-    }
-
-    this.updateUI();
-} 
-        purchaseItem(itemType, itemName) {
-    const prices = {
-        vehicle: 100, // Example coin cost
-        stage: 200
-    };
-
-    if (this.gameState.coins >= prices[itemType]) {
-        this.gameState.coins -= prices[itemType];
-        
-        if (itemType === 'vehicle') {
-            this.gameState.unlockedVehicles.push(itemName);
-        } else if (itemType === 'stage') {
-            this.gameState.unlockedStages.push(itemName);
-        }
-
-        this.updateUI();
-        alert(`${itemName} purchased successfully!`);
-    } else {
-        alert('Not enough coins to purchase this item.');
-    }
-}
-   useDiamondBoost() {
-    if (this.gameState.diamonds > 0) {
-        this.physics.maxSpeed += 2; // Example boost
-        this.gameState.diamonds--;
-        this.updateUI();
-        alert('Boost activated!');
-    } else {
-        alert('Not enough diamonds for a boost.');
-    }
-}
         this.collectibles = {
             coin: { value: 1, color: '#f1c40f', radius: 10 },
             diamond: { value: 10, color: '#3498db', radius: 8 }
         };
+
         this.gameState = {
-    ...this.gameState,
-    currentLevel: 1, // Track the current level
-    unlockedCharacters: [],
-    unlockedVehicles: [],
-    unlockedStages: [],
-    coins: 0, // For purchasing
-    diamonds: 0 // For boosts
-};
+            ...this.gameState,
+            currentLevel: 1,
+            unlockedCharacters: [],
+            unlockedVehicles: [],
+            unlockedStages: [],
+            coins: 0,
+            diamonds: 0
+        };
 
         this.physics = {
             velocity: 0,
@@ -160,15 +101,64 @@ class NepalRacer {
         this.init();
     }
 
+    completeLevel() {
+        const currentStage = this.stages[this.gameState.currentStage];
+        const currentLevel = currentStage.levels[this.gameState.currentLevel - 1];
+
+        this.gameState.diamonds += currentLevel.diamondBonus;
+
+        if (currentLevel.unlockCharacter) this.gameState.unlockedCharacters.push('Character_' + this.gameState.currentLevel);
+        if (currentLevel.unlockVehicle) this.gameState.unlockedVehicles.push(this.gameState.currentVehicle);
+        if (currentLevel.unlockStage) this.gameState.unlockedStages.push(this.gameState.currentStage);
+
+        if (this.gameState.currentLevel < currentStage.levels.length) {
+            this.gameState.currentLevel++;
+        } else {
+            this.gameOver();
+        }
+
+        this.updateUI();
+    }
+
+    purchaseItem(itemType, itemName) {
+        const prices = {
+            vehicle: 100,
+            stage: 200
+        };
+
+        if (this.gameState.coins >= prices[itemType]) {
+            this.gameState.coins -= prices[itemType];
+            
+            if (itemType === 'vehicle') {
+                this.gameState.unlockedVehicles.push(itemName);
+            } else if (itemType === 'stage') {
+                this.gameState.unlockedStages.push(itemName);
+            }
+
+            this.updateUI();
+            alert(`${itemName} purchased successfully!`);
+        } else {
+            alert('Not enough coins to purchase this item.');
+        }
+    }
+
+    useDiamondBoost() {
+        if (this.gameState.diamonds > 0) {
+            this.physics.maxSpeed += 2;
+            this.gameState.diamonds--;
+            this.updateUI();
+            alert('Boost activated!');
+        } else {
+            alert('Not enough diamonds for a boost.');
+        }
+    }
+
     init() {
-        // Initialize preview images
         this.updatePreviewImages();
         
-        // Add change event listeners for previews
         this.elements.vehicleSelect.addEventListener('change', () => this.updatePreviewImages());
         this.elements.stageSelect.addEventListener('change', () => this.updatePreviewImages());
 
-        // Simulate loading
         this.elements.loadingProgress.style.width = '100%';
         setTimeout(() => {
             this.screens.loading.style.display = 'none';
@@ -196,7 +186,6 @@ class NepalRacer {
         this.elements.retryBtn.addEventListener('click', () => this.startGame());
         this.elements.menuBtn.addEventListener('click', () => this.showScreen('menu'));
 
-        // Mobile and desktop controls
         this.elements.accelerateBtn.addEventListener('mousedown', () => this.accelerate());
         this.elements.accelerateBtn.addEventListener('touchstart', () => this.accelerate());
         this.elements.accelerateBtn.addEventListener('mouseup', () => this.stopAccelerate());
@@ -207,7 +196,6 @@ class NepalRacer {
         this.elements.brakeBtn.addEventListener('mouseup', () => this.stopBrake());
         this.elements.brakeBtn.addEventListener('touchend', () => this.stopBrake());
 
-        // Keyboard controls
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') this.accelerate();
             if (e.key === 'ArrowLeft') this.brake();
@@ -279,23 +267,19 @@ class NepalRacer {
         this.gameState.currentVehicle = this.elements.vehicleSelect.value;
         this.gameState.currentStage = this.elements.stageSelect.value;
 
-        // Apply vehicle properties
         const vehicle = this.vehicles[this.gameState.currentVehicle];
         this.physics.maxSpeed = vehicle.maxSpeed;
         this.elements.player.style.backgroundColor = vehicle.color;
 
-        // Apply stage properties
         const stage = this.stages[this.gameState.currentStage];
         this.physics.friction = stage.friction;
         this.physics.gravity = stage.gravity;
         this.elements.background.style.backgroundColor = stage.background;
         this.elements.terrain.style.backgroundColor = stage.terrain;
 
-        // Reset physics
         this.physics.velocity = 0;
         this.physics.acceleration = 0;
 
-        // Clear collectibles
         this.elements.collectibles.innerHTML = '';
 
         this.showScreen('game');
@@ -351,7 +335,6 @@ class NepalRacer {
             this.gameOver();
         }
 
-        // Scroll background and terrain
         const scrollSpeed = this.physics.velocity * 2;
         const currentTerrainPos = parseFloat(this.elements.terrain.style.left || 0);
         const currentBackgroundPos = parseFloat(this.elements.background.style.left || 0);
@@ -369,7 +352,6 @@ class NepalRacer {
         this.elements.scoreValue.textContent = this.gameState.score;
         this.elements.levelValue.textContent = this.stages[this.gameState.currentStage].difficulty;
 
-        // Tilt the vehicle based on acceleration
         const tiltAngle = this.physics.acceleration * 5;
         this.elements.player.style.transform = `rotate(${tiltAngle}deg)`;
     }
@@ -389,7 +371,6 @@ class NepalRacer {
         finalStats.innerHTML = `
             Distance: ${Math.round(this.gameState.distance)}m<br>
             Top Speed: ${Math.round(this.gameState.speed)} km/h<br>
-            
             Coins: ${this.gameState.coins}<br>
             Diamonds: ${this.gameState.diamonds}<br>
             Score: ${this.gameState.score}
@@ -398,7 +379,6 @@ class NepalRacer {
     }
 }
 
-// Initialize game when page loads
 window.addEventListener('load', () => {
     const game = new NepalRacer();
 });
