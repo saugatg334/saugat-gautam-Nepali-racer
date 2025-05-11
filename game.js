@@ -379,6 +379,28 @@ class NepalRacer {
     }
 }
 
+updatePreviewImages() {
+    const selectedVehicle = this.elements.vehicleSelect.selectedOptions[0];
+    const selectedStage = this.elements.stageSelect.selectedOptions[0];
+
+    // Vehicle preview
+    if (selectedVehicle && selectedVehicle.dataset.image) {
+        this.elements.vehiclePreview.src = selectedVehicle.dataset.image;
+        this.elements.vehiclePreview.alt = selectedVehicle.value;
+    } else {
+        this.elements.vehiclePreview.src = '';
+        this.elements.vehiclePreview.alt = 'No vehicle selected';
+    }
+
+    // Stage preview
+    if (selectedStage && selectedStage.dataset.image) {
+        this.elements.stagePreview.src = selectedStage.dataset.image;
+        this.elements.stagePreview.alt = selectedStage.value;
+    } else {
+        this.elements.stagePreview.src = '';
+        this.elements.stagePreview.alt = 'No stage selected';
+    }
+}
 window.addEventListener('load', () => {
     const game = new NepalRacer();
 });
