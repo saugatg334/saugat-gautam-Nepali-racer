@@ -1,0 +1,20 @@
+[
+    {
+        "id": "tata-sumo",
+        "maxSpeed": 12,
+        "acceleration": 0.4,
+        "handling": 0.8,
+        "fuelEfficiency": 0.9,
+        "color": "#2ecc71",
+        "level": 1
+    },
+    {
+        "id": "mahindra-bolero",
+        "maxSpeed": 13,
+        "acceleration": 0.45,
+        "handling": 0.85,
+        "fuelEfficiency": 0.85,
+        "color": "#3498db",
+        "level": 1
+    }
+]
