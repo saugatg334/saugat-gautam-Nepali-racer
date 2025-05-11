@@ -119,7 +119,8 @@ class NepalRacer {
 
         this.updateUI();
     }
-
+this.elements.vehicleSelect.addEventListener('change', () => this.updatePreviewImages());
+this.elements.stageSelect.addEventListener('change', () => this.updatePreviewImages());
     purchaseItem(itemType, itemName) {
         const prices = {
             vehicle: 100,
