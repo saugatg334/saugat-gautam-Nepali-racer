@@ -79,20 +79,7 @@ class NepalRacer {
             coin: { value: 1, color: '#f1c40f', radius: 10 },
             diamond: { value: 10, color: '#3498db', radius: 8 }
         };
-async loadGameData() {
-    const vehiclesResponse = await fetch('vehicles.json');
-    this.vehicles = await vehiclesResponse.json();
-    async init() {
-    await this.loadGameData();
-    this.updatePreviewImages();
-    this.bindEvents();
-    this.showScreen('menu');
-}
 
-
-    const stagesResponse = await fetch('stages.json');
-    this.stages = await stagesResponse.json();
-}
         this.gameState = {
             ...this.gameState,
             currentLevel: 1,
@@ -114,6 +101,37 @@ async loadGameData() {
         this.init();
     }
 
+    async loadGameData() {
+        const vehiclesResponse = await fetch('vehicles.json');
+        this.vehicles = await vehiclesResponse.json();
+
+        const stagesResponse = await fetch('stages.json');
+        this.stages = await stagesResponse.json();
+    }
+
+    async init() {
+        await this.loadGameData();
+        this.populateDropdowns();
+        this.updatePreviewImages();
+        this.bindEvents();
+        this.showScreen('menu');
+    }
+
+    populateDropdowns() {
+        this.populateDropdown(this.elements.vehicleSelect, Object.entries(this.vehicles).map(([id, data]) => ({ id, ...data })), 'id');
+        this.populateDropdown(this.elements.stageSelect, Object.entries(this.stages).map(([id, data]) => ({ id, ...data })), 'id');
+    }
+
+    populateDropdown(selectElement, data, labelKey) {
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.id;
+            option.textContent = item[labelKey];
+            option.dataset.image = item.image; // For previews
+            selectElement.appendChild(option);
+        });
+    }
+
     completeLevel() {
         const currentStage = this.stages[this.gameState.currentStage];
         const currentLevel = currentStage.levels[this.gameState.currentLevel - 1];
@@ -132,8 +150,7 @@ async loadGameData() {
 
         this.updateUI();
     }
-this.elements.vehicleSelect.addEventListener('change', () => this.updatePreviewImages());
-this.elements.stageSelect.addEventListener('change', () => this.updatePreviewImages());
+
     purchaseItem(itemType, itemName) {
         const prices = {
             vehicle: 100,
@@ -167,31 +184,24 @@ this.elements.stageSelect.addEventListener('change', () => this.updatePreviewIma
         }
     }
 
-    init() {
-        this.updatePreviewImages();
-        
-        this.elements.vehicleSelect.addEventListener('change', () => this.updatePreviewImages());
-        this.elements.stageSelect.addEventListener('change', () => this.updatePreviewImages());
-
-        this.elements.loadingProgress.style.width = '100%';
-        setTimeout(() => {
-            this.screens.loading.style.display = 'none';
-            this.showScreen('menu');
-        }, 3000);
-
-        this.bindEvents();
-    }
-
     updatePreviewImages() {
         const selectedVehicle = this.elements.vehicleSelect.selectedOptions[0];
         const selectedStage = this.elements.stageSelect.selectedOptions[0];
-        
-        if (selectedVehicle.dataset.image) {
+
+        if (selectedVehicle && selectedVehicle.dataset.image) {
             this.elements.vehiclePreview.src = selectedVehicle.dataset.image;
+            this.elements.vehiclePreview.alt = selectedVehicle.value;
+        } else {
+            this.elements.vehiclePreview.src = '';
+            this.elements.vehiclePreview.alt = 'No vehicle selected';
         }
-        
-        if (selectedStage.dataset.image) {
+
+        if (selectedStage && selectedStage.dataset.image) {
             this.elements.stagePreview.src = selectedStage.dataset.image;
+            this.elements.stagePreview.alt = selectedStage.value;
+        } else {
+            this.elements.stagePreview.src = '';
+            this.elements.stagePreview.alt = 'No stage selected';
         }
     }
 
@@ -209,6 +219,9 @@ this.elements.stageSelect.addEventListener('change', () => this.updatePreviewIma
         this.elements.brakeBtn.addEventListener('touchstart', () => this.brake());
         this.elements.brakeBtn.addEventListener('mouseup', () => this.stopBrake());
         this.elements.brakeBtn.addEventListener('touchend', () => this.stopBrake());
+
+        this.elements.vehicleSelect.addEventListener('change', () => this.updatePreviewImages());
+        this.elements.stageSelect.addEventListener('change', () => this.updatePreviewImages());
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') this.accelerate();
@@ -378,14 +391,7 @@ this.elements.stageSelect.addEventListener('change', () => this.updatePreviewIma
 
         requestAnimationFrame(() => this.gameLoop());
     }
-// vehicles.js
-export const vehicles = {
-    'tata-sumo': { /* ... */ },
-    'mahindra-bolero': { /* ... */ }
-};
 
-// game.js
-import { vehicles } from './vehicles.js';
     gameOver() {
         this.gameState.isRunning = false;
         const finalStats = document.getElementById('final-stats');
@@ -400,41 +406,6 @@ import { vehicles } from './vehicles.js';
     }
 }
 
-updatePreviewImages() {
-    const selectedVehicle = this.elements.vehicleSelect.selectedOptions[0];
-    const selectedStage = this.elements.stageSelect.selectedOptions[0];
-
-    // Vehicle preview
-    if (selectedVehicle && selectedVehicle.dataset.image) {
-        this.elements.vehiclePreview.src = selectedVehicle.dataset.image;
-        this.elements.vehiclePreview.alt = selectedVehicle.value;
-    } else {
-        this.elements.vehiclePreview.src = '';
-        this.elements.vehiclePreview.alt = 'No vehicle selected';
-    }
-
-    // Stage preview
-    if (selectedStage && selectedStage.dataset.image) {
-        this.elements.stagePreview.src = selectedStage.dataset.image;
-        this.elements.stagePreview.alt = selectedStage.value;
-    } else {
-        this.elements.stagePreview.src = '';
-        this.elements.stagePreview.alt = 'No stage selected';
-    }
-}
 window.addEventListener('load', () => {
     const game = new NepalRacer();
 });
-populateDropdown(selectElement, data, labelKey) {
-    data.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.id;
-        option.textContent = item[labelKey];
-        option.dataset.image = item.image; // For previews
-        selectElement.appendChild(option);
-    });
-}
-
-// Example call
-populateDropdown(this.elements.vehicleSelect, this.vehicles, 'id');
-populateDropdown(this.elements.stageSelect, this.stages, 'id');
