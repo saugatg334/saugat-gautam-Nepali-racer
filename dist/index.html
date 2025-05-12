@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Racer</title>
+  <link rel="stylesheet" crossorigin href="/assets/index-CmjAVzUi.css">
+</head>
+<body>
+    <div id="loading-screen" class="screen active">
+        <div class="loading-content">
+            <h1>Nepali Racer</h1>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p>Loading...</p>
+            <div class="developer-info">
+                
+                <small>Developed by Saugat Gautam</small>
+            </div>
+        </div>
+    </div>
+    <div id="game-container">
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen">
+            <h1>Nepali Racer</h1>
+            <div class="menu-options">
+                <div class="select-container">
+                    <div class="select-preview">
+                        <img id="vehicle-preview" src="https://images.pexels.com/photos/2127039/pexels-photo-2127039.jpeg" alt="Vehicle Preview">
+                    </div>
+                    <select id="vehicle-select">
+                        <option value="tata-sumo" data-image="https://images.pexels.com/photos/2127039/pexels-photo-2127039.jpeg">Tata Sumo (Level 1)</option>
+                        <option value="mahindra-bolero" data-image="https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg">Mahindra Bolero (Level 1)</option>
+                        <option value="royal-enfield" data-image="https://images.pexels.com/photos/2519374/pexels-photo-2519374.jpeg">Royal Enfield (Level 2)</option>
+                        <option value="tempo" data-image="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg">Tempo (Level 1)</option>
+                        <option value="sajha-bus" data-image="https://images.pexels.com/photos/385998/pexels-photo-385998.jpeg">Sajha Bus (Level 2)</option>
+                        <option value="tuk-tuk" data-image="https://images.pexels.com/photos/5759959/pexels-photo-5759959.jpeg">Electric Tuk Tuk (Level 1)</option>
+                        <option value="hotrod" data-image="https://images.pexels.com/photos/1592384/pexels-photo-1592384.jpeg">Nepali HotRod (Level 3)</option>
+                        <option value="mountain-bike" data-image="https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg">Mountain Bike (Level 1)</option>
+                        <option value="mustang" data-image="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg">Mustang GT (Level 4)</option>
+                        <option value="super-bike" data-image="https://images.pexels.com/photos/2393821/pexels-photo-2393821.jpeg">Super Bike (Level 5)</option>
+                    </select>
+                </div>
+                <div class="select-container">
+                    <div class="select-preview">
+                        <img id="stage-preview" src="https://images.pexels.com/photos/831056/pexels-photo-831056.jpeg" alt="Stage Preview">
+                    </div>
+                    <select id="stage-select">
+                        <option value="east-west" data-image="https://images.pexels.com/photos/831056/pexels-photo-831056.jpeg">East-West Highway - Easy (Level 1)</option>
+                        <option value="araniko" data-image="https://images.pexels.com/photos/808910/pexels-photo-808910.jpeg">Araniko Highway - Medium (Level 2)</option>
+                        <option value="bp" data-image="https://images.pexels.com/photos/1955134/pexels-photo-1955134.jpeg">BP Highway - Medium (Level 2)</option>
+                        <option value="prithvi" data-image="https://images.pexels.com/photos/1252814/pexels-photo-1252814.jpeg">Prithvi Highway - Hard (Level 3)</option>
+                        <option value="nijgadh" data-image="https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg">Nijgadh Fast Track - Expert (Level 4)</option>
+                        <option value="moon" data-image="https://images.pexels.com/photos/39561/solar-flare-sun-eruption-energy-39561.jpeg">Moon Track - Extreme (Level 5)</option>
+                    </select>
+                </div>
+                <button id="start-btn">Start Race</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div id="game-stats">
+                <div id="level">Level: <span id="level-value">1</span></div>
+                <div id="score">Score: <span id="score-value">0</span></div>
+                <div id="fuel">Fuel: <span id="fuel-value">100</span>%</div>
+                <div id="coins">Coins: <span id="coin-value">0</span></div>
+                <div id="diamonds">Diamonds: <span id="diamond-value">0</span></div>
+                <div id="distance">Distance: <span id="distance-value">0</span>m</div>
+                <div id="speed">Speed: <span id="speed-value">0</span> km/h</div>
+            </div>
+            <div id="game-area">
+                <div id="player"></div>
+                <div id="terrain"></div>
+                <div id="background"></div>
+                <div id="obstacles"></div>
+                <div id="collectibles"></div>
+            </div>
+            <div id="controls">
+                <button id="brake-btn">⬅️ Brake</button>
+                <button id="accelerate-btn">➡️ Gas</button>
+            </div>
+        </div>
+<select id="vehicle-select">
+    <option value="tata-sumo" data-image="images/tata-sumo.png">Tata Sumo</option>
+    <option value="mahindra-bolero" data-image="images/mahindra-bolero.png">Mahindra Bolero</option>
+    <option value="royal-enfield" data-image="images/royal-enfield.png">Royal Enfield</option>
+</select>
+
+<select id="stage-select">
+    <option value="east-west" data-image="images/east-west.png">East-West</option>
+    <option value="himalayan-highway" data-image="images/himalayan-highway.png">Himalayan Highway</option>
+    <option value="kathmandu-ringroad" data-image="images/kathmandu-ringroad.png">Kathmandu Ring Road</option>
+</select>
+        <!-- Game Over Screen -->
+        <div id="game-over" class="screen">
+            <h2>Game Over</h2>
+            <div id="final-stats"></div>
+            <button id="retry-btn">Retry</button>
+            <button id="menu-btn">Main Menu</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
